@@ -63,6 +63,7 @@ def search():
 
     # Pregunta
     query = string[0]
+    print(query)
 
     # Respuestas
     key = string[1]
