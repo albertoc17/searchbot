@@ -21,6 +21,7 @@ def ocr_space_file(filename, overlay=False, api_key='af599d01d888957', language=
                           data=payload,
                           )
     return r.content.decode().replace("'", '"')
+# search the results.
 
 
 def search():
@@ -47,6 +48,7 @@ def search():
 
     # Retorna el contenido exacto requerido como un array
     filter = (data['ParsedResults'][0]['ParsedText']).split(' ')
+    print("Printing the contents of the api..\n")
     print(filter)
 
     # Loop utilizado para filtrar palabras clave
@@ -65,14 +67,11 @@ def search():
                 break
             strApi.append(i.replace('\r\n', ''))
 
-    # Obtiene el texto de la imagen
-    # string = get_string(latest_file)
-    # print(string)
 
     # Pregunta
     query = queryStr
     q_string = " ".join(query)
-    print("Printing question...")
+    print("Printing question...\n")
     print(q_string)
     # Si el array string no llega a tener 4 valores, arroja una excepcion
     try:
@@ -88,10 +87,10 @@ def search():
     search = q_string.replace(" ", "+")
 
     # Se carga el enlace con la pregunta y palabras claves
-    googleSearch = "https://www.google.cl/search?q="+search+" "+key+" "+key2+" "+key3
+    google_search = "https://www.google.cl/search?q="+search+" "+key+" "+key2+" "+key3
 
     # Se realiza el request al enlace, retorna informacion de la pagina
-    r = requests.get(googleSearch)
+    r = requests.get(google_search )
 
     # Devuelve el texto de la pagina con tag's
     soup = BeautifulSoup(r.text, "html.parser")
@@ -121,6 +120,7 @@ def search():
         contf = 1
 
     # Muestra los resultados en porcentajes
+    print("Printing the results..\n")
     print(str(cont / contf * 100) + "% - " + key)
     print(str(cont2 / contf * 100) + "% - " + key2)
     print(str(cont3 / contf * 100) + "% - " + key3)
